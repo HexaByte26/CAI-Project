@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap');
+
+:root {
+    --green: #79e060;
+    --green-deep: #3fae35;
+    --on-green: #07130a;
+    --line: rgba(255, 255, 255, 0.12);
+    --gutter: clamp(20px, 5vw, 72px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Chrome-black backdrop for every page: steel gradient, green glows, film grain */
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse 80% 70% at 30% 50%, rgba(33, 40, 35, 0.85), transparent 70%),
+        radial-gradient(900px 500px at 12% 8%, rgba(121, 224, 96, 0.10), transparent 60%),
+        radial-gradient(800px 600px at 92% 100%, rgba(63, 174, 53, 0.12), transparent 60%),
+        linear-gradient(160deg, #202722 0%, #0a0c0b 55%, #1a201c 100%);
+    background-attachment: fixed;
+    font-family: 'JetBrains Mono', monospace;
+    color: #e6eae6;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0.10;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Chrome sheen, dot grid and brushed-metal lines, pinned behind everything */
+html::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 100% 0, rgba(214, 224, 218, 0.24), transparent 36%),
+        radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px) 0 0 / 18px 18px,
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.022) 0 1px, transparent 1px 4px);
+}
+
+main { position: relative; z-index: 2; font-family: 'Montserrat', sans-serif; }
+
+a:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+/* Shared navigation (hides on scroll down, frosted once the page has scrolled) */
+.smart-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-bottom: 1px solid transparent;
+    transition: transform 0.3s ease-in-out, background 0.3s, border-color 0.3s;
+}
+
+.smart-nav.nav-solid {
+    background: rgba(10, 12, 11, 0.6);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-bottom-color: var(--line);
+}
+
+.nav-hidden { transform: translateY(-100%); }
+
+.smart-nav nav { max-width: 1280px; margin: 0 auto; padding: 22px var(--gutter); }
+
+nav ul { list-style: none; display: flex; justify-content: flex-end; align-items: center; gap: 32px; }
+
+nav a { text-decoration: none; color: #aeb7b1; font-size: 14px; transition: color 0.2s; }
+nav a:hover { color: #fff; }
+
+nav a.btn-login {
+    background: linear-gradient(180deg, var(--green), var(--green-deep));
+    color: var(--on-green);
+    font-weight: 700;
+    padding: 7px 16px;
+    border-radius: 8px;
+    box-shadow: 0 0 18px -4px rgba(121, 224, 96, 0.6);
+}
+
+/* Shared chrome headline text */
+.chrome-text {
+    background: linear-gradient(180deg, #ffffff 0%, #a3ada7 55%, #eef2ef 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Shared frosted chrome surface (sign-up card, concept cards) */
+.glass {
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background:
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 4px),
+        linear-gradient(160deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03)),
+        rgba(46, 51, 48, 0.6);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    backdrop-filter: blur(16px) saturate(1.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 24px 50px -20px #000;
+}
+
+.glass::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12%;
+    right: 12%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    opacity: 0.8;
+}

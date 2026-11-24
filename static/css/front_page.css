@@ -1,0 +1,167 @@
+/* Front page layout. Theme, nav, background, glass surface and chrome text live in Main.css */
+main { padding-bottom: 96px; }
+
+/* Title: same dimmed chip image as the landing hero, fading into the background */
+.title-section {
+    position: relative;
+    min-height: 78vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 120px var(--gutter) 40px;
+}
+
+.title-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: url("spinning_circuit.jpeg") 55% 50% / cover;
+    opacity: 0.4;
+    filter: grayscale(0.25) contrast(1.2) brightness(0.9);
+    -webkit-mask-image: radial-gradient(ellipse 55% 60% at 50% 50%, #000 25%, transparent 100%);
+    mask-image: radial-gradient(ellipse 55% 60% at 50% 50%, #000 25%, transparent 100%);
+}
+
+.title-section h1 {
+    position: relative;
+    font-size: clamp(44px, 7vw, 88px);
+    font-weight: 500;
+    line-height: 1.08;
+}
+
+.title-section h1::after {
+    content: "";
+    display: block;
+    width: 72px;
+    height: 3px;
+    margin: 28px auto 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--green), var(--green-deep));
+    box-shadow: 0 0 16px var(--green);
+}
+
+/* Text + image rows */
+.info-section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 72px var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+}
+
+.info-section.reverse-layout .image-block { order: -1; }
+
+.text-block h2,
+.emphasis-header h2 {
+    font-size: clamp(28px, 3.4vw, 44px);
+    font-weight: 500;
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.text-block h2::before,
+.emphasis-header h2::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 14px;
+    vertical-align: middle;
+    background: var(--green);
+    box-shadow: 0 0 10px var(--green);
+    transform: rotate(45deg);
+}
+
+.text-block p {
+    font-size: clamp(16px, 1.5vw, 18px);
+    line-height: 1.8;
+    color: #bcc5bf;
+}
+
+.text-block p + p { margin-top: 16px; }
+
+.image-block {
+    position: relative;
+    min-height: 280px;
+    overflow: hidden;
+    border-radius: 22px;
+    border: 1px solid var(--line);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 24px 50px -20px #000;
+}
+
+.image-block img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 280px;
+    object-fit: cover;
+    filter: grayscale(0.2) contrast(1.1) brightness(0.9);
+}
+
+.image-block::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent 55%, rgba(10, 12, 11, 0.6)), rgba(121, 224, 96, 0.06);
+}
+
+/* Memory section */
+.emphasis-section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 72px var(--gutter);
+    text-align: center;
+}
+
+.emphasis-header p {
+    max-width: 700px;
+    margin: 0 auto 48px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #bcc5bf;
+}
+
+.concept-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 28px;
+}
+
+.card {
+    padding: 36px 24px;
+    transition: transform 0.25s, border-color 0.25s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(121, 224, 96, 0.45);
+}
+
+.card img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #eef2ef;
+    margin-bottom: 10px;
+}
+
+.card p {
+    line-height: 1.6;
+    color: #b3bcb6;
+}
+
+@media (max-width: 860px) {
+    .info-section { grid-template-columns: 1fr; padding: 48px var(--gutter); }
+    .info-section.reverse-layout .image-block { order: 0; }
+}
